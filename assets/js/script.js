@@ -81,13 +81,18 @@ $("#task-form-modal .btn-primary").click(function() {
 
 //click on text paragraph to update the text area
 $(".list-group").on("click", "p", function(){
+  //get current text of p element
   var text= $(this)
   .text()
   .trim();
+
+  //replace p element with a new textarea
   var textInput = $("<textarea>")
   .addClass("form-control")
   .val(text);
   $(this).replaceWith(textInput);
+
+  //auto focus new element
   textInput.trigger("focus");
 });
 
@@ -103,10 +108,9 @@ $(".list-group").on("blur", "textarea", function() {
   .closest(".list-group")
   .attr("id")
   .replace("list-", "");
-
-  //get the tasks' position in the lis tof other li elements
+  //get the tasks' position in the list of other li elements
   var index = $(this)
-  .closest("list-group-item")
+  .closest(".list-group-item")
   .index();
 
   tasks[status][index].text = text;
@@ -117,7 +121,7 @@ $(".list-group").on("blur", "textarea", function() {
   .addClass("m-1")
   .text(text);
 
-  //replacetextarea with p element
+  //replace textarea with p element
   $(this).replaceWith(taskP);
 });
 
@@ -125,15 +129,14 @@ $(".list-group").on("blur", "textarea", function() {
 $(".list-group").on("click", "span", function () {
   //get current text
   var date = $(this)
-  .text()
-  .trim();
+    .text()
+    .trim();
 
   //create new input element
   var dateInput = $("<input>")
-  .attr("type", "text")
-  .addClass("form-control")
-  .val(date);
-
+    .attr("type", "text")
+    .addClass("form-control")
+    .val(date);
   //swap out elements
   $(this).replaceWith(dateInput);
 
@@ -156,7 +159,7 @@ $(".list-group").on("blur", "input[type='text']", function() {
 
   //get the task's position in the list of other li elements
   var index = $(this)
-  .closest("list-group-item")
+  .closest(".list-group-item")
   .index();
 
   //update task in array and re-save to localStorage
